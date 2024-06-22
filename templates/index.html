@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.name }} - プロフィール</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#">ホーム</a>
+            <a href="#">業績・発表</a>
+            <a href="#">ブログ</a>
+            <a href="#">研究</a>
+            <a href="#">開発成果</a>
+            <a href="#">所属</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="profile">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <div class="profile-image-placeholder">
+                        <img src="{{ url_for('static', filename='1624_20240521162702.png') }}" alt="プロフィール画像" id="profile-image">
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h1>プロフィール</h1>
+                    <h2>{{ profile.name }}</h2>
+                    <p>{{ profile.title }}</p>
+                    <p>{{ profile.affiliation }}</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/kaitaro_ai/"><img src="{{ url_for('static', filename='instagram-icon.png') }}" alt="Instagram"></a>
+                        <a href="https://x.com/kkkai05144"><img src="{{ url_for('static', filename='twitter-icon.png') }}" alt="Twitter"></a>
+                        <a href="#"><img src="{{ url_for('static', filename='email-icon.png') }}" alt="Email"></a>
+                        <a href="https://github.com/kai00514"><img src="{{ url_for('static', filename='github-icon.png') }}" alt="GitHub"></a>
+                    </div>
+                </div>
+            </div>
+            <p class="description">{{ profile.description }}</p>
+            
+            <div class="profile-details">
+                <div class="interests">
+                    <h3>興味・関心</h3>
+                    <ul>
+                        {% for interest in profile.interests %}
+                            <li>{{ interest }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="education">
+                    <h3>学歴</h3>
+                    <ul>
+                        {% for edu in profile.education %}
+                            <li>{{ edu }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="news">
+            <h2>News</h2>
+            <ul>
+                {% for item in news %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        
+        <section id="talks">
+            <h2>Recent & Upcoming Talks</h2>
+            {% for talk in talks %}
+                <div class="talk">
+                    <h3>{{ talk.title }}</h3>
+                    <p>{{ talk.description }}</p>
+                    <p class="talk-details">{{ talk.date }} - {{ talk.location }}</p>
+                </div>
+            {% endfor %}
+        </section>
+    </main>
+</body>
+</html>
